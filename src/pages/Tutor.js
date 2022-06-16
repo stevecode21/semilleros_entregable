@@ -7,6 +7,7 @@ export const Tutor = () => {
         <img
           src="https://www.questionpro.com/blog/wp-content/uploads/2018/08/Encuestas-estudiantes-768x512.jpg"
           className="object-cover w-full h-full"
+          alt=""
         />
       </div>
       <div className="flex-1">
