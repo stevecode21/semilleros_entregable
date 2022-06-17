@@ -1,6 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const Tutor = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [faculty, setFaculty] = useState("");
+  const [message, setMessage] = useState("");
+
+  function createStudent(e) {
+    e.preventDefault();
+    if (name && email && faculty) {
+      const storage = JSON.parse(localStorage.getItem("tutors"));
+
+      let tutors =
+        storage && storage.tutors && storage.tutors.length
+          ? storage.tutors
+          : [];
+
+      tutors.push({ name, email, faculty });
+
+      const data = {
+        tutors: tutors,
+      };
+
+      localStorage.setItem("tutors", JSON.stringify(data));
+      setMessage("Datos guardados!");
+      setName("");
+      setEmail("");
+      setFaculty("");
+
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
+    }
+  }
   return (
     <div className="flex flex-row w-full h-screen">
       <div className="flex-1">
@@ -13,10 +45,15 @@ export const Tutor = () => {
       <div className="flex-1">
         <div class="block p-6 rounded-lg shadow-lg bg-white w-full h-full flex flex-col align-center justify-center">
           <h1 className="text-center text-3xl my-10">Crear Tutor</h1>
-          <form>
+          <p className="text-center my-4 text-2xl text-green-300 font-bold">
+            {message && message}
+          </p>
+          <form onSubmit={createStudent}>
             <div class="w-full">
               <div class="form-group mb-6">
                 <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   type="text"
                   class="form-control
           block
@@ -41,6 +78,8 @@ export const Tutor = () => {
             </div>
             <div class="form-group mb-6">
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 class="form-control block
         w-full
@@ -62,6 +101,8 @@ export const Tutor = () => {
             </div>
             <div class="form-group mb-6">
               <input
+                value={faculty}
+                onChange={(e) => setFaculty(e.target.value)}
                 type="text"
                 class="form-control block
         w-full

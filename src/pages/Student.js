@@ -1,6 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const Student = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [career, setCareer] = useState("");
+  const [message, setMessage] = useState("");
+
+  function createStudent(e) {
+    e.preventDefault();
+    if (name && email && career) {
+      const storage = JSON.parse(localStorage.getItem("student"));
+      console.log(
+        "🚀 ~ file: Student.js ~ line 12 ~ createStudent ~ storage",
+        storage
+      );
+
+      let students =
+        storage && storage.students && storage.students.length
+          ? storage.students
+          : [];
+
+      students.push({ name, email, career });
+
+      const data = {
+        students: students,
+      };
+
+      localStorage.setItem("student", JSON.stringify(data));
+      setMessage("Datos guardados!");
+      setName("");
+      setEmail("");
+      setCareer("");
+
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
+    }
+  }
+
   return (
     <div className="flex flex-row w-full h-screen">
       <div className="flex-1">
@@ -11,14 +48,19 @@ export const Student = () => {
         />
       </div>
       <div className="flex-1">
-        <div class="block p-6 rounded-lg shadow-lg bg-white w-full h-full flex flex-col align-center justify-center">
+        <div className="block p-6 rounded-lg shadow-lg bg-white w-full h-full flex flex-col align-center justify-center">
           <h1 className="text-center text-3xl my-10">Crear estudiante</h1>
-          <form>
-            <div class="w-full">
-              <div class="form-group mb-6">
+          <p className="text-center my-4 text-2xl text-green-300 font-bold">
+            {message && message}
+          </p>
+          <form onSubmit={createStudent}>
+            <div className="w-full">
+              <div className="form-group mb-6">
                 <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   type="text"
-                  class="form-control
+                  className="form-control
           block
           w-full
           px-3
@@ -39,10 +81,12 @@ export const Student = () => {
                 />
               </div>
             </div>
-            <div class="form-group mb-6">
+            <div className="form-group mb-6">
               <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="email"
-                class="form-control block
+                className="form-control block
         w-full
         px-3
         py-1.5
@@ -60,10 +104,12 @@ export const Student = () => {
                 placeholder="Correo"
               />
             </div>
-            <div class="form-group mb-6">
+            <div className="form-group mb-6">
               <input
+                value={career}
+                onChange={(e) => setCareer(e.target.value)}
                 type="text"
-                class="form-control block
+                className="form-control block
         w-full
         px-3
         py-1.5
@@ -84,7 +130,7 @@ export const Student = () => {
 
             <button
               type="submit"
-              class="
+              className="
       w-full
       px-6
       py-2.5

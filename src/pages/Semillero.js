@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const Semillero = () => {
+  const [students, setStudents] = useState([]);
+
+  const [checkedState, setCheckedState] = useState([]);
+
+  const handleOnChange = (position) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+  };
+
+  useEffect(() => {
+    const storage = JSON.parse(localStorage.getItem("student"));
+    if (storage && storage.students) {
+      setStudents(storage.students);
+      new Array(storage.students.length).fill(false);
+    }
+  }, []);
+
   return (
     <div className="flex flex-row w-full h-screen">
       <div className="flex-1">
@@ -16,6 +36,28 @@ export const Semillero = () => {
           <form>
             <div class="w-full">
               <div class="form-group mb-6">
+                <div class="flex items-center mb-4 space-x-6 flex-wrap space-y-4">
+                  {students &&
+                    students.map((s, index) => {
+                      return (
+                        <>
+                          <input
+                            id={`custom-checkbox-${index}`}
+                            type="checkbox"
+                            value=""
+                            onChange={() => handleOnChange(index)}
+                            class="inline-flex w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                          />
+                          <label
+                            for="default-checkbox"
+                            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          >
+                            {s.name}
+                          </label>
+                        </>
+                      );
+                    })}
+                </div>
                 <input
                   type="text"
                   class="form-control
