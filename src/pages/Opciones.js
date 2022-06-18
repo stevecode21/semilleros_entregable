@@ -33,7 +33,7 @@ export const Opciones = () => {
           Elige la acción que deseas realizar
         </h1>
       </div>
-      <div className="grid grid-cols-2 w-full gap-y-10">
+      <div className="grid grid-cols-1 px-6 lg:px-0 lg:grid-cols-2 w-full gap-y-10">
         {cards.map((card, index) => {
           return (
             <div key={index} className="col-span-1 h-42 m-auto">
