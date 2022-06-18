@@ -48,7 +48,7 @@ export const Student = () => {
         />
       </div>
       <div className="flex-1">
-        <div className="block p-6 rounded-lg shadow-lg bg-white w-full h-full flex flex-col align-center justify-center">
+        <div className="block p-6 bg-white w-full h-full flex flex-col align-center justify-center">
           <h1 className="text-center text-3xl my-10">Crear estudiante</h1>
           <p className="text-center my-4 text-2xl text-green-300 font-bold">
             {message && message}
