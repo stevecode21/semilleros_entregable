@@ -5,11 +5,7 @@ export const Activities = () => {
 
   useEffect(() => {
     const storage = JSON.parse(localStorage.getItem("semilleros"));
-    console.log(
-      "🚀 ~ file: Activities.js ~ line 8 ~ useEffect ~ storage",
-      storage
-    );
-    setSemilleros(storage.semilleros || []);
+    if (storage && storage.semilleros) setSemilleros(storage.semilleros || []);
   }, []);
 
   return (
