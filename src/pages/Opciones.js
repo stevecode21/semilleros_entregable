@@ -29,7 +29,7 @@ export const Opciones = () => {
   return (
     <div>
       <div>
-        <h1 className="text-center text-3xl my-10">
+        <h1 className="text-center text-3xl my-10 text-white font-bold">
           Elige la acción que deseas realizar
         </h1>
       </div>

@@ -9,7 +9,7 @@ import { Activities } from "./pages/Activities";
 function App() {
   const location = useLocation();
   return (
-    <div className="h-screen relative">
+    <div className="h-screen relative backgroundimage">
       <div className="absolute top-5 left-5 bg-green-700 px-10 rounded-md">
         {location.pathname !== "/" && (
           <Link to="/" className="text-white">
@@ -17,7 +17,7 @@ function App() {
           </Link>
         )}
       </div>
-      <div className="h-full flex flex-col align-center justify-center space-y-20">
+      <div className="h-full flex flex-col align-center  space-y-20">
         <Routes>
           <Route path="/" element={<Opciones />} />
           <Route path="student" element={<Student />} />
